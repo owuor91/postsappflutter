@@ -15,4 +15,13 @@ class PostsService {
       throw Exception('Failed to load posts: $e');
     }
   }
+
+  Future<Post> fetchPostById(int postId) async {
+    try {
+      final Response response = await _apiService.get(ApiConstants.postEndpoint(postId));
+      return Post.fromJson(response.data);
+    } catch (e) {
+      throw Exception('Failed to load post with id $postId: $e');
+    }
+  }
 }

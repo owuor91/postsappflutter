@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../viewmodels/posts_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'comments_screen.dart';
 
 class PostsScreen extends StatelessWidget{
   const PostsScreen({super.key});
@@ -37,7 +38,7 @@ class _PostsScreenContent extends State<_PostsScreenState> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Posts'),
+        title: const Text('Posts', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
       ),
       body: _buildBody(postsViewModel),
     );
@@ -57,6 +58,14 @@ class _PostsScreenContent extends State<_PostsScreenState> {
               child: ListTile(
                 title: Text(post.title, style: const TextStyle(fontWeight: FontWeight.bold)),
                 subtitle: Text(post.body),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CommentsScreen(post: post),
+                    ),
+                  );
+                },
               ),
             );
           },
